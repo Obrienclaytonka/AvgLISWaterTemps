@@ -1,4 +1,4 @@
----
+888[p44444444444446
 title: "temperature boxplots"
 author: "Katie O'Brien-Clayton"
 date: "2023-06-29"
@@ -23,35 +23,39 @@ library(readxl)
 test <- read_excel("C:\\R\\data\\Temperature2023_copy.xlsx")
 
 ##Reorder
- ##data$Cruise <- factor(data$Cruise , levels = ##c("WQJAN", "WQFEB", "WQMAR", "WQAPR", "WQMAY", ##"WQJUN", "HYJUN", "WQJUL", "HYJUL", "WQAUG", ##"HYAUG", "WQSEP", "HYSEP", "WQOCT", "WQNOV", ##"WQDEC"))+
+## 
+cruiseOrder <- factor(test$Cruise, levels = c("WQJAN", "WQFEB", "WQMAR", "WQAPR", "WQMAY", "WQJUN", "HYJUN", "WQJUL", "HYJUL", "WQAUG", "HYAUG", "WQSEP", "HYSEP", "WQOCT", "WQNOV", "WQDEC"))
 
-ggplot(data = test, aes(x = Cruise, y = AvgTemp))+
+ggplot(data = test, aes(x = cruiseOrder, y = AvgTemp))+
 
-  geom_boxplot(aes(fill = Depth)) +
-    theme_classic()+
+  geom_boxplot(aes(fill = Depth))+
+theme_classic()+
 ##Creates a boxplot and assigns a fill color
- 
+  
+  
    geom_point(data = subset(test, test$Year == "2023"), aes(x = Cruise,
-                                                                y = AvgTemp),
-             colour = "red", shape = 17)+
+                                                               y = AvgTemp),
+            colour = "seashell3", shape = 17)+
 
-  labs(x= "WQJAN", "WQFEB", "WQMAR", "WQAPR", "WQMAY", "WQJUN", "HYJUN", "WQJUL", "HYJUL", "WQAUG", "HYAUG", "WQSEP", "HYSEP", "WQOCT", "WQNOV", "WQDEC", y="Average Temperature (deg C)")+
+  labs(x= "Cruise", y="Average Temperature (deg C)")+
   
   
    ggtitle("Average Long Island Sound Water Temperatures 2013-2023")+ #Assigns a title and subtitle to the graphic
 
-  theme_bw() #Various default themes in R, I use this often since it puts up a white background.
+  ##theme_bw() #Various default themes in R, I use this often since it puts up a white background.
 
-     theme(legend.position = "none", #Further customization of theme
+     theme(legend.position = "right", #Further customization of theme= none, left, right, top, bottom
 
         plot.title = element_text(size = 15), # adjust size of plot title
 
         axis.title = element_text(size = 15), # adjust size of axis title
 
         strip.background = element_rect(colour="black",
-                                        fill="white"))
-
-
+                                        fill="white"),
+        
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) #adjust axis text
+  
+  
 
 #Saves graphic in a specific location and in a specific format (.png) and size
 ggsave(paste0("C:\\R\\plots\\AvgTempData_2013-2023.png"), height = 7.2, width = 10)
