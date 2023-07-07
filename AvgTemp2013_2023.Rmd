@@ -35,7 +35,7 @@ theme_classic()+
   
    geom_point(data = subset(test, test$Year == "2023"), aes(x = Cruise,
                                                                y = AvgTemp),
-            colour = "seashell3", shape = 17)+
+            colour = "seashell3", shape = 17, size=2)+
 
   labs(x= "Cruise", y="Average Temperature (deg C)")+
   

@@ -36,11 +36,11 @@ theme_classic()+
   labs (x = "Cruise", y = "Average Temperature (deg C)") +
   
   
-   ggtitle("Average Long Island Sound Water Temperatures 2013-2023")+ #Assigns a title and subtitle to the graphic
+   ggtitle("Average Long Island Sound Surface Water Temperatures 2013-2023")+ #Assigns a title and subtitle to the graphic
 
   ##theme_bw() #Various default themes in R, I use this often since it puts up a white background.
 
-     theme(legend.position = "none", #Further customization of theme= none, left, right, top, bottom
+     theme(legend.position = "right", #Further customization of theme= none, left, right, top, bottom
 
        plot.title = element_text(size = 15), # adjust size of plot title
 
@@ -49,7 +49,11 @@ theme_classic()+
         strip.background = element_rect(colour="black",
                                         fill="white"),
         
-        axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) #adjust axis text
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))  #adjust axis text
+
+##change axis labels
+##      scale_x_discrete(breaks=c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", ##"11", "12", "13", "14", "15", "16"),
+##              labels=c("WQJAN", "WQFEB", "WQMAR", "WQAPR", "WQMAY", "WQJUN", "HYJUN", ##"WQJUL", "HYJUL", "WQAUG", "HYAUG", "WQSEP", "HYSEP", "WQOCT", "WQNOV", "WQDEC"))
 
 #Saves graphic in a specific location and in a specific format (.png) and size
 ggsave(paste0("C:\\R\\plots\\AvgTempData_2013-2023.png"), height = 7.2, width = 10)
