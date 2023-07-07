@@ -12,7 +12,6 @@ library(dplyr) #You don't actually need this package for the code below but dply
 
 library(readxl)
 
- 
 
 test <- read_excel("C:\\R\\data\\Temperature2023_copy.xlsx")
 
@@ -24,15 +23,17 @@ ggplot(data= subset(test, test$Depth == "Surface"), aes(x = Cruise2, y = AvgTemp
 
   geom_boxplot(outlier.shape= NA, aes(fill=Cruise))+
 theme_classic()+
-  geom_jitter()+
+  
+  geom_jitter(data= subset(test, test$Depth == "Surface"))+
+  
 ##Creates a boxplot and assigns a fill color
   
   
-  ## geom_point(data = subset(test, test$Year == "2023"), aes(x = Cruise,
-            ##                                                   y = AvgTemp),
-            ##colour = "seashell3", shape = 17)+
+ ## geom_point(data = subset(test, test$Year == "2023"), aes(x = Cruise,
+  ##                                                        y = AvgTemp),
+  ##      colour = "seashell3", shape = 17)+
 
-  labs(x= "Cruise", y="Average Temperature (deg C)")+
+  labs (x = "Cruise", y = "Average Temperature (deg C)") +
   
   
    ggtitle("Average Long Island Sound Water Temperatures 2013-2023")+ #Assigns a title and subtitle to the graphic
@@ -49,8 +50,6 @@ theme_classic()+
                                         fill="white"),
         
         axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) #adjust axis text
-
-  
 
 #Saves graphic in a specific location and in a specific format (.png) and size
 ggsave(paste0("C:\\R\\plots\\AvgTempData_2013-2023.png"), height = 7.2, width = 10)
